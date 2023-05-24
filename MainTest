@@ -1,0 +1,122 @@
+package bai2;
+
+import java.time.LocalDate;
+import java.util.Scanner;
+
+public class MainTest {
+
+    public static void main(String[] args) {
+        DanhSach ds = new DanhSach();
+        Scanner sc = new Scanner(System.in);
+        int menu, menu_1;
+
+        do {
+            System.out.println("===========");
+            System.out.println("Choose menu");
+            System.out.println("1. Add");
+            System.out.println("2. Print");
+            System.out.println("3. Total number");
+            System.out.println("4. Average to money of foreign customer");
+            System.out.println("5. Print invoice date");
+            System.out.println("0. Exit");
+            System.out.print("Choose: ");
+            menu = sc.nextInt();
+
+            switch (menu) {
+                case 1:
+                    do {
+                        System.out.println("1. Vietnamese Customer");
+                        System.out.println("2. Foreign Customer");
+                        System.out.println("0. Back");
+                        System.out.print("Choose: ");
+                        menu_1 = sc.nextInt();
+
+                        switch (menu_1) {
+                            case 1:
+                                sc.nextLine();
+                                System.out.print("Input customer code: ");
+                                String customer_id = sc.nextLine();
+
+                                System.out.print("Input name: ");
+                                String name = sc.nextLine();
+
+                                System.out.print("Input customer match: ");
+                                String customer_match = sc.nextLine();
+
+                                System.out.print("Input day: ");
+                                int day = sc.nextInt();
+                                System.out.print("Input month: ");
+                                int month = sc.nextInt();
+                                System.out.print("Input year: ");
+                                int year = sc.nextInt();
+                                LocalDate ngayGiaoDich = LocalDate.of(year, month, day);
+
+                                System.out.print("input quantity: ");
+                                double quantity = sc.nextDouble();
+
+                                System.out.print("Input unit_price: ");
+                                double unit_price = sc.nextDouble();
+
+                                System.out.print("Input quote: ");
+                                double quote = sc.nextDouble();
+
+                                KHVN kh = new KHVN(customer_match, quote, customer_id, name, ngayGiaoDich, quantity, unit_price);
+                                ds.add(kh);
+                                break;
+                            case 2:
+                                sc.nextLine();
+                                System.out.print("Input customer code: ");
+                                customer_id = sc.nextLine();
+
+                                System.out.print("Input name: ");
+                                name = sc.nextLine();
+
+                                System.out.print("Input nationality: ");
+                                String nationality = sc.nextLine();
+
+                                System.out.print("Input day: ");
+                                day = sc.nextInt();
+                                System.out.print("Input month: ");
+                                month = sc.nextInt();
+                                System.out.print("Input year: ");
+                                year = sc.nextInt();
+                                ngayGiaoDich = LocalDate.of(year, month, day);
+
+                                System.out.print("input quantity: ");
+                                quantity = sc.nextDouble();
+
+                                System.out.print("Input unit_price: ");
+                                unit_price = sc.nextDouble();
+                                break;
+                            default:
+                                if (menu_1 != 0) {
+                                    System.out.println("Type again");
+                                } else {
+                                    System.out.println("Back");
+                                }
+                        }
+                    } while (menu_1 != 0);
+                    break;
+                case 2:
+                    ds.print_i();
+                    break;
+                case 3:
+                    ds.total_number();
+                    break;
+                case 4:
+                    ds.total_price();
+                    break;
+                case 5:
+                    LocalDate export_date = LocalDate.of(2022, 5, 24);
+                    ds.print_invoice_date(export_date);
+                    break;
+                default:
+                    if (menu != 0) {
+                        System.out.println("Type again");
+                    } else {
+                        System.out.println("Exit success");
+                    }
+            }
+        } while (menu != 0);
+    }
+}
