@@ -1,0 +1,37 @@
+package bai2;
+
+import java.time.LocalDate;
+
+public class KHNN extends KhachHang{
+    private String nationality;
+
+    public KHNN() {
+    }
+    
+    public KHNN(String nationality) {
+        this.nationality = nationality;
+    }
+
+    public KHNN(String nationality, String customer_id, String name, LocalDate invoice_date, double quantity, double unit_price) {
+        super(customer_id, name, invoice_date, quantity, unit_price);
+        this.nationality = nationality;
+    }
+
+    public String getNationality() {
+        return nationality;
+    }
+
+    public void setNationality(String nationality) {
+        this.nationality = nationality;
+    }
+
+    @Override
+    public double amount(){
+        double amount = getQuantity() * getUnit_price();
+        return amount;
+    }
+    @Override
+    public String toString() {
+        return "KHNN{"+ super.toString()+ "nationality=" + nationality + '}';
+    }
+}
