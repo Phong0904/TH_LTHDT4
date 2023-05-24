@@ -1,0 +1,55 @@
+package bai2;
+
+import java.time.LocalDate;
+
+public class KHVN extends KhachHang {
+
+    private String customer_match;
+    private double quote;
+
+    public KHVN() {
+    }
+
+    public KHVN(String customer_match, double quote) {
+        this.customer_match = customer_match;
+        this.quote = quote;
+    }
+
+    public KHVN(String customer_match, double quote, String customer_id, String name, LocalDate invoice_date, double quantity, double unit_price) {
+        super(customer_id, name, invoice_date, quantity, unit_price);
+        this.customer_match = customer_match;
+        this.quote = quote;
+    }
+
+    public String getCustomer_match() {
+        return customer_match;
+    }
+
+    public void setCustomer_match(String customer_match) {
+        this.customer_match = customer_match;
+    }
+
+    public double getQuote() {
+        return quote;
+    }
+
+    public void setQuote(double quote) {
+        this.quote = quote;
+    }
+
+    @Override
+    public double amount() {
+        double amount;
+        if (getQuantity() <= getQuote()) {
+            amount = getQuantity() * getUnit_price();
+        } else {
+            amount = getQuantity() * getUnit_price() * getQuote() + (getQuote() - getQuantity()) * getUnit_price() * 2.5;
+        }
+        return amount;
+    }
+
+    @Override
+    public String toString() {
+        return "KHVN{" + super.toString() + "customer_match=" + customer_match + ", quote=" + quote + '}';
+    }
+}
