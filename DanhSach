@@ -1,0 +1,61 @@
+package bai2;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+
+public class DanhSach {
+
+    private ArrayList<KhachHang> khn = new ArrayList<>();
+
+    public void add(KhachHang kh) {
+        khn.add(kh);
+        System.out.println("more success");
+    }
+
+    public void print_i() {
+        for (KhachHang c : khn) {
+            System.out.println(c);
+        }
+    }
+
+    public void total_number() {
+        int cusVN = 0;
+        int cusNN = 0;
+        for (KhachHang k : khn) {
+            if (k instanceof KHVN) {
+                cusVN++;
+            } else if (k instanceof KHNN) {
+                cusNN++;
+            }
+        }
+        System.out.println("total number of vietnamese customer: " + cusVN);
+        System.out.println("total number of foreign customers: " + cusNN);
+    }
+    
+    public void total_price(){
+        int cusNN = 0;
+        double totalprice = 0;
+        for (KhachHang k : khn) {
+            if(k instanceof KHNN){
+                cusNN++;
+                totalprice = k.amount();
+            }
+        }
+        if(cusNN>0){
+            double avg_total_price = totalprice / cusNN;
+            System.out.println("average to money of foreign customers" + avg_total_price);
+        }else{
+            System.out.println("Don't have data");
+        }
+    }
+    
+    public void print_invoice_date(LocalDate invoice_date){
+        System.out.println("Date is after " + invoice_date + ":");
+        
+        for (KhachHang k : khn) {
+            if(k.getInvoice_date().isAfter(invoice_date)){
+                System.out.println(k);
+            }
+        }
+    }
+}
